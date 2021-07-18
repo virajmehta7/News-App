@@ -1,0 +1,194 @@
+import 'package:flutter/material.dart';
+import 'category_news.dart';
+import 'get_news.dart';
+import 'newsTile.dart';
+
+class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  List articles = [];
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getArticles();
+  }
+
+  getArticles() async {
+    GetNews getNews = GetNews();
+    await getNews.getNews();
+    articles = getNews.news;
+    setState(() {
+      loading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text("VM",
+              style: TextStyle(color: Colors.blue, fontSize: 23),
+            ),
+            Text("News",
+              style: TextStyle(color: Colors.black, fontSize: 24),
+            )
+          ],
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Container(
+                child: Text('Categories',
+                  style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.only(bottom: 10),
+              ),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/header.jpg'),
+                      fit: BoxFit.fill,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight)
+                  )
+              ),
+            ),
+            // GestureDetector(
+            //   onTap: (){
+            //     Navigator.push(context,
+            //         MaterialPageRoute(
+            //             builder: (context) => CategoryNews(category: "General")));
+            //   },
+            //   child: Padding(
+            //     padding: EdgeInsets.fromLTRB(15, 8, 15, 18),
+            //     child: Text('General',
+            //       style: TextStyle(fontSize: 20),
+            //     ),
+            //   ),
+            // ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Business")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 8, 15, 18),
+                child: Text('Business',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Health")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
+                child: Text('Health',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Sports")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
+                child: Text('Sports',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Entertainment")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
+                child: Text('Entertainment',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Science")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
+                child: Text('Science',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryNews(category: "Technology")));
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
+                child: Text('Technology',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: loading ?
+      Center(
+        child: Container(
+          child: CircularProgressIndicator(),
+        ),
+      ) :
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(12, 2, 12, 2),
+              child: ListView.builder(
+                itemCount: articles.length,
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return NewsTile(
+                    image: articles[index].urlToImage,
+                    title: articles[index].title,
+                    description: articles[index].description,
+                    url: articles[index].url,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
