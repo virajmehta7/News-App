@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'category_news.dart';
 import 'get_news.dart';
 import 'newsTile.dart';
+import 'search_news.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -35,15 +36,27 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("VM",
-              style: TextStyle(color: Colors.blue, fontSize: 23),
+              style: TextStyle(color: Colors.blue, fontSize: 23.5),
             ),
             Text("News",
               style: TextStyle(color: Colors.black, fontSize: 24),
             )
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: (){
+              Navigator.push(context,
+                  MaterialPageRoute(
+                      builder: (context) => SearchNews()));
+            },
+            icon: Icon(Icons.search),
+            iconSize: 26,
+          )
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
@@ -67,19 +80,6 @@ class _HomeState extends State<Home> {
                   )
               ),
             ),
-            // GestureDetector(
-            //   onTap: (){
-            //     Navigator.push(context,
-            //         MaterialPageRoute(
-            //             builder: (context) => CategoryNews(category: "General")));
-            //   },
-            //   child: Padding(
-            //     padding: EdgeInsets.fromLTRB(15, 8, 15, 18),
-            //     child: Text('General',
-            //       style: TextStyle(fontSize: 20),
-            //     ),
-            //   ),
-            // ),
             GestureDetector(
               onTap: (){
                 Navigator.push(context,
