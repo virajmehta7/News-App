@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'all_news.dart';
 import 'category_news.dart';
 import 'get_news.dart';
 import 'newsTile.dart';
@@ -64,20 +65,26 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => AllNews()));
+              },
               child: Container(
-                child: Text('Categories',
-                  style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('All News',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.only(bottom: 10),
-              ),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/header.jpg'),
-                      fit: BoxFit.fill,
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight)
-                  )
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/allnews.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
+                ),
               ),
             ),
             GestureDetector(
@@ -86,10 +93,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Business")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 8, 15, 18),
-                child: Text('Business',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Business',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/business.jpg"),
+                    fit: BoxFit.fitWidth,
+                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                  )
                 ),
               ),
             ),
@@ -99,10 +115,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Health")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
-                child: Text('Health',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Health',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/health.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
                 ),
               ),
             ),
@@ -112,10 +137,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Sports")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
-                child: Text('Sports',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Sports',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/sports.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
                 ),
               ),
             ),
@@ -125,10 +159,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Entertainment")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
-                child: Text('Entertainment',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Entertainment',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/entertainment.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
                 ),
               ),
             ),
@@ -138,10 +181,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Science")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
-                child: Text('Science',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Science',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/science.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
                 ),
               ),
             ),
@@ -151,10 +203,19 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                         builder: (context) => CategoryNews(category: "Technology")));
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 18),
-                child: Text('Technology',
-                  style: TextStyle(fontSize: 20),
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  child: Text('Technology',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("images/technology.jpg"),
+                      fit: BoxFit.fitWidth,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
+                    )
                 ),
               ),
             ),

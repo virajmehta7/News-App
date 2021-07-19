@@ -26,18 +26,12 @@ class _SearchNewsState extends State<SearchNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Text("VM",
-              style: TextStyle(color: Colors.blue, fontSize: 23.5),
-            ),
-            Text("News",
-              style: TextStyle(color: Colors.black, fontSize: 24),
-            )
-          ],
+        title: Text("Search",
+          style: TextStyle(color: Colors.blue, fontSize: 23.5),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
@@ -51,8 +45,8 @@ class _SearchNewsState extends State<SearchNews> {
                     child: TextField(
                       controller: search,
                       decoration: InputDecoration(
-                          hintText: "Search",
-                          hintStyle: TextStyle(color: Colors.black, fontSize: 18)
+                          hintText: "Search for news",
+                          hintStyle: TextStyle(color: Colors.grey, fontSize: 16)
                       ),
                     ),
                   ),
