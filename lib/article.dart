@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Article extends StatefulWidget {
-  final String url;
-  const Article({Key key, this.url}) : super(key: key);
+  final String url, title;
+  const Article({Key key, this.url, this.title}) : super(key: key);
 
   @override
   _ArticleState createState() => _ArticleState();
@@ -26,6 +27,7 @@ class _ArticleState extends State<Article> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("VM",
               style: TextStyle(color: Colors.blue, fontSize: 23),
@@ -35,6 +37,14 @@ class _ArticleState extends State<Article> {
             )
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: (){
+              Share.share(widget.url + "\n\n\n" + widget.title);
+            },
+            icon: Icon(Icons.share),
+          )
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),

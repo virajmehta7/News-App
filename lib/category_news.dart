@@ -35,8 +35,9 @@ class _CategoryNewsState extends State<CategoryNews> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.category,
-          style: TextStyle(color: Colors.black, fontSize: 22),
+          style: TextStyle(color: Colors.blue, fontSize: 23.5),
         ),
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
@@ -51,7 +52,7 @@ class _CategoryNewsState extends State<CategoryNews> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 2, 12, 2),
+              padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
               child: ListView.builder(
                 itemCount: articles.length,
                 shrinkWrap: true,

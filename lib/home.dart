@@ -232,7 +232,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 2, 12, 2),
+              padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
               child: ListView.builder(
                 itemCount: articles.length,
                 shrinkWrap: true,

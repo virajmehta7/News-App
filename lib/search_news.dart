@@ -67,7 +67,7 @@ class _SearchNewsState extends State<SearchNews> {
             articles.length == 0 ?
             Container() :
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 30, 12, 2),
+              padding: EdgeInsets.fromLTRB(12, 30, 12, 5),
               child: ListView.builder(
                 itemCount: articles.length,
                 shrinkWrap: true,

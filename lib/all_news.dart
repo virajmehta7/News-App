@@ -34,8 +34,9 @@ class _AllNewsState extends State<AllNews> {
     return Scaffold(
       appBar: AppBar(
         title: Text("All News",
-          style: TextStyle(color: Colors.black, fontSize: 22),
+          style: TextStyle(color: Colors.blue, fontSize: 23.5),
         ),
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
@@ -50,7 +51,7 @@ class _AllNewsState extends State<AllNews> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 2, 12, 2),
+              padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
               child: ListView.builder(
                 itemCount: articles.length,
                 shrinkWrap: true,

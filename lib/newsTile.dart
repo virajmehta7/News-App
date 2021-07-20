@@ -10,7 +10,16 @@ class NewsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.only(bottom: 25),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey.shade700,
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey.shade200
+        ),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(bottom: 22),
         child: Column(
           children: [
             ClipRRect(
@@ -18,13 +27,13 @@ class NewsTile extends StatelessWidget {
                 imageUrl: image,
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 10),
             Text(title,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 8),
             Text(description,
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
             )
@@ -34,7 +43,7 @@ class NewsTile extends StatelessWidget {
       onTap: (){
         Navigator.push(context,
             MaterialPageRoute(
-                builder: (context) => Article(url: url)));
+                builder: (context) => Article(url: url, title: title,)));
       },
     );
   }
