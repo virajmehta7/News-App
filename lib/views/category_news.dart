@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'get_news.dart';
+import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
 class CategoryNews extends StatefulWidget {
@@ -12,6 +12,7 @@ class CategoryNews extends StatefulWidget {
 
 class _CategoryNewsState extends State<CategoryNews> {
 
+  Service service = Service();
   List articles = [];
   bool loading = true;
 
@@ -22,9 +23,7 @@ class _CategoryNewsState extends State<CategoryNews> {
   }
 
   getCategoryArticles() async {
-    GetCategoryNews getCategoryNews = GetCategoryNews();
-    await getCategoryNews.getCategoryNews(widget.category);
-    articles = getCategoryNews.news;
+    articles = await service.getCategoryNews(widget.category);
     setState(() {
       loading = false;
     });
@@ -35,7 +34,7 @@ class _CategoryNewsState extends State<CategoryNews> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.category,
-          style: TextStyle(color: Colors.blue, fontSize: 23.5),
+          style: TextStyle(color: Colors.blue, fontSize: 22),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -59,6 +58,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                 physics: ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return NewsTile(
+                    source: articles[index].source.name,
                     image: articles[index].urlToImage,
                     title: articles[index].title,
                     description: articles[index].description,

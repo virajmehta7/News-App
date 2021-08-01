@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'article.dart';
 
 class NewsTile extends StatelessWidget {
-  final String image, title, description, url;
-  const NewsTile({Key key, this.image, this.title, this.description, this.url}) : super(key: key);
+  final String image, title, description, url, source;
+  const NewsTile({Key key, this.image, this.title, this.description, this.url, this.source}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class NewsTile extends StatelessWidget {
       onTap: (){
         Navigator.push(context,
             MaterialPageRoute(
-                builder: (context) => Article(url: url, title: title,)));
+                builder: (context) => Article(url: url, title: title, source: source,)));
       },
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'get_news.dart';
+import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
 class SearchNews extends StatefulWidget {
@@ -11,14 +11,14 @@ class SearchNews extends StatefulWidget {
 
 class _SearchNewsState extends State<SearchNews> {
 
+  Service service = Service();
   List articles = [];
   TextEditingController search = TextEditingController();
 
   getSearchArticles(search) async {
-    GetSearchNews getSearchNews = GetSearchNews();
-    await getSearchNews.getSearchNews(search);
+    articles = await service.getSearchNews(search);
     setState(() {
-      articles = getSearchNews.news;
+      articles;
     });
   }
 
@@ -43,6 +43,10 @@ class _SearchNewsState extends State<SearchNews> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20,5,5,0),
                     child: TextField(
+                      textInputAction: TextInputAction.go,
+                      onSubmitted: (_){
+                        getSearchArticles(search.text);
+                      },
                       controller: search,
                       decoration: InputDecoration(
                           hintText: "Search for news",
@@ -74,6 +78,7 @@ class _SearchNewsState extends State<SearchNews> {
                 physics: ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return NewsTile(
+                    source: articles[index].source.name,
                     image: articles[index].urlToImage,
                     title: articles[index].title,
                     description: articles[index].description,

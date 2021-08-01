@@ -5,8 +5,8 @@ import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Article extends StatefulWidget {
-  final String url, title;
-  const Article({Key key, this.url, this.title}) : super(key: key);
+  final String url, title, source;
+  const Article({Key key, this.url, this.title, this.source}) : super(key: key);
 
   @override
   _ArticleState createState() => _ArticleState();
@@ -14,33 +14,26 @@ class Article extends StatefulWidget {
 
 class _ArticleState extends State<Article> {
 
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  final Completer controller = Completer();
 
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    if (Platform.isAndroid)
+      WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("VM",
-              style: TextStyle(color: Colors.blue, fontSize: 23),
-            ),
-            Text("News",
-              style: TextStyle(color: Colors.black, fontSize: 24),
-            )
-          ],
+        title:Text(widget.source,
+          style: TextStyle(color: Colors.blue, fontSize: 22),
         ),
         actions: [
           IconButton(
             onPressed: (){
-              Share.share(widget.url + "\n\n\n" + widget.title);
+              Share.share(widget.url);
             },
             icon: Icon(Icons.share),
           )
@@ -53,7 +46,7 @@ class _ArticleState extends State<Article> {
         child: WebView(
           initialUrl: widget.url,
           onWebViewCreated: (WebViewController webViewController) {
-            _controller.complete(webViewController);
+            controller.complete(webViewController);
           },
         ),
       ),
