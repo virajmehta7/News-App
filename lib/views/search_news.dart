@@ -27,7 +27,7 @@ class _SearchNewsState extends State<SearchNews> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Search",
-          style: TextStyle(color: Colors.blue, fontSize: 23.5),
+          style: TextStyle(color: Colors.black, fontSize: 23.5),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -49,7 +49,7 @@ class _SearchNewsState extends State<SearchNews> {
                       },
                       controller: search,
                       decoration: InputDecoration(
-                          hintText: "Search for news",
+                          hintText: "Search...",
                           hintStyle: TextStyle(color: Colors.grey, fontSize: 16)
                       ),
                     ),

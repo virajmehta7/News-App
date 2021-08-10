@@ -33,7 +33,7 @@ class _AllNewsState extends State<AllNews> {
     return Scaffold(
       appBar: AppBar(
         title: Text("All News",
-          style: TextStyle(color: Colors.blue, fontSize: 22),
+          style: TextStyle(color: Colors.black, fontSize: 22),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,

@@ -9,17 +9,15 @@ class NewsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey.shade700,
-            width: 0.5,
-          ),
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.grey.shade200
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30)
         ),
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.only(bottom: 22),
+        margin: EdgeInsets.fromLTRB(5,5,5,30),
+        color: Colors.grey.shade200,
+        elevation: 15,
+        shadowColor: Colors.grey,
+        borderOnForeground: true,
         child: Column(
           children: [
             ClipRRect(
@@ -27,16 +25,21 @@ class NewsTile extends StatelessWidget {
                 imageUrl: image,
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(20),
             ),
-            SizedBox(height: 10),
-            Text(title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(title,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
-            SizedBox(height: 8),
-            Text(description,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
-            )
+            Padding(
+              padding: EdgeInsets.fromLTRB(10,5,10,10),
+              child: Text(description,
+                style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+              ),
+            ),
+            SizedBox(height: 15)
           ],
         ),
       ),

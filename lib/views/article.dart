@@ -28,7 +28,7 @@ class _ArticleState extends State<Article> {
     return Scaffold(
       appBar: AppBar(
         title:Text(widget.source,
-          style: TextStyle(color: Colors.blue, fontSize: 22),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         actions: [
           IconButton(

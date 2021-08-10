@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("VM News",
-          style: TextStyle(color: Colors.blue, fontSize: 22),
+          style: TextStyle(color: Colors.black, fontSize: 22),
         ),
         actions: [
           IconButton(
