@@ -17,7 +17,6 @@ class NewsTile extends StatelessWidget {
         color: Colors.grey.shade200,
         elevation: 15,
         shadowColor: Colors.grey,
-        borderOnForeground: true,
         child: Column(
           children: [
             ClipRRect(
