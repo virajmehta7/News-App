@@ -20,7 +20,7 @@ class _CategoryTileState extends State<CategoryTile> {
       },
       child: Container(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+          padding: EdgeInsets.fromLTRB(15, 50, 15, 40),
           child: Text(widget.category,
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),

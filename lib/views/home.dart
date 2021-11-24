@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
               },
               child: Container(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(15, 40, 15, 40),
+                  padding: EdgeInsets.fromLTRB(15, 50, 15, 40),
                   child: Text('All News',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
