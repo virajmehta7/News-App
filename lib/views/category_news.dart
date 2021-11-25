@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
@@ -42,10 +43,30 @@ class _CategoryNewsState extends State<CategoryNews> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: loading ?
-      Center(
-        child: Container(
-          child: CircularProgressIndicator(),
-        ),
+      Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
+            child: ListView.builder(
+              itemCount: 5,
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  margin: EdgeInsets.fromLTRB(5,5,5,30),
+                  elevation: 15,
+                  shadowColor: Colors.grey,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.4,
+                  ),
+                );
+              },
+            ),
+          )
       ) :
       SingleChildScrollView(
         child: Column(

@@ -44,8 +44,8 @@ class _SearchNewsState extends State<SearchNews> {
                 },
                 controller: search,
                 decoration: InputDecoration(
-                    hintText: "Search...",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 16)
+                  hintText: "Search...",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
               ),
             ),
