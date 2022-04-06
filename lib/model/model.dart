@@ -1,9 +1,9 @@
 class Article {
-  Source source;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
+  Source? source;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
 
   Article({
     this.source,
@@ -16,16 +16,16 @@ class Article {
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
       source: Source.fromJson(json['source']),
-      title: json['title'] as String,
-      description: json['description'] as String,
-      url: json['url'] as String,
-      urlToImage: json['urlToImage'] as String,
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      url: json['url'] as String?,
+      urlToImage: json['urlToImage'] as String?,
     );
   }
 }
 
 class Source {
-  String name;
+  String? name;
 
   Source({this.name});
 

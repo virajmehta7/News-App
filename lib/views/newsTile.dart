@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'article.dart';
 
 class NewsTile extends StatelessWidget {
-  final String image, title, description, url, source;
-  const NewsTile({Key key, this.image, this.title, this.description, this.url, this.source}) : super(key: key);
+  final String? image, title, description, url, source;
+  const NewsTile({Key? key, this.image, this.title, this.description, this.url, this.source}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +19,22 @@ class NewsTile extends StatelessWidget {
         shadowColor: Colors.grey,
         child: Column(
           children: [
-            ClipRRect(
+            image != null ? ClipRRect(
               child: CachedNetworkImage(
-                imageUrl: image,
+                imageUrl: image!,
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(20),
-            ),
+            ) : Container(),
             Padding(
               padding: EdgeInsets.all(10),
-              child: Text(title,
+              child: Text(title!,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(10,5,10,10),
-              child: Text(description,
+              child: Text(description!,
                 style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
               ),
             ),

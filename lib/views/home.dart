@@ -8,7 +8,7 @@ import 'newsTile.dart';
 import 'search_news.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();

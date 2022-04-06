@@ -4,7 +4,7 @@ import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
 class AllNews extends StatefulWidget {
-  const AllNews({Key key}) : super(key: key);
+  const AllNews({Key? key}) : super(key: key);
 
   @override
   _AllNewsState createState() => _AllNewsState();

@@ -4,8 +4,8 @@ import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
 class CategoryNews extends StatefulWidget {
-  final String category;
-  const CategoryNews({Key key, this.category}) : super(key: key);
+  final String? category;
+  const CategoryNews({Key? key, this.category}) : super(key: key);
 
   @override
   _CategoryNewsState createState() => _CategoryNewsState();
@@ -34,7 +34,7 @@ class _CategoryNewsState extends State<CategoryNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.category,
+        title: Text(widget.category!,
           style: TextStyle(color: Colors.black, fontSize: 22),
         ),
         centerTitle: true,

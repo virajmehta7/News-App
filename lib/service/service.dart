@@ -13,7 +13,7 @@ class Service {
     return articles;
   }
 
-  getCategoryNews(String category) async {
+  getCategoryNews(String? category) async {
     var url = Uri.parse("https://newsapi.org/v2/top-headlines?category=$category&country=in&language=en&pageSize=100&apiKey=e384bb1a856a4051984dc40de691c58f");
     var res = await http.get(url);
     Map<String, dynamic> json = jsonDecode(res.body);

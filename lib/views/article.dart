@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Article extends StatefulWidget {
-  final String url, title, source;
-  const Article({Key key, this.url, this.title, this.source}) : super(key: key);
+  final String? url, title, source;
+  const Article({Key? key, this.url, this.title, this.source}) : super(key: key);
 
   @override
   _ArticleState createState() => _ArticleState();
@@ -27,13 +27,13 @@ class _ArticleState extends State<Article> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text(widget.source,
+        title:Text(widget.source!,
           style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         actions: [
           IconButton(
             onPressed: (){
-              Share.share(widget.url);
+              Share.share(widget.url!);
             },
             icon: Icon(Icons.share),
           )

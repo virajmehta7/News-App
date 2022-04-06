@@ -3,7 +3,7 @@ import 'package:vmnews/service/service.dart';
 import 'newsTile.dart';
 
 class SearchNews extends StatefulWidget {
-  const SearchNews({Key key}) : super(key: key);
+  const SearchNews({Key? key}) : super(key: key);
 
   @override
   _SearchNewsState createState() => _SearchNewsState();

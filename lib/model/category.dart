@@ -1,5 +1,5 @@
 class Category {
-  final String image, category;
+  final String? image, category;
 
   Category({
     this.image,
