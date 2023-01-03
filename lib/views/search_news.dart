@@ -44,7 +44,7 @@ class _SearchNewsState extends State<SearchNews> {
                 },
                 controller: search,
                 decoration: InputDecoration(
-                  hintText: "Search...",
+                  hintText: "Search for topics, locations & sources",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
               ),
@@ -64,6 +64,7 @@ class _SearchNewsState extends State<SearchNews> {
                     title: articles[index].title,
                     description: articles[index].description,
                     url: articles[index].url,
+                      publishedAt: articles[index].publishedAt
                   );
                 },
               ),

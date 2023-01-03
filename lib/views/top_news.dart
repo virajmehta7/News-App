@@ -3,22 +3,21 @@ import 'package:shimmer/shimmer.dart';
 import '../service/service.dart';
 import 'newsTile.dart';
 
-class CategoryNews extends StatefulWidget {
-  final category;
-  const CategoryNews({Key? key, required this.category}) : super(key: key);
+class TopNews extends StatefulWidget {
+  const TopNews({Key? key}) : super(key: key);
 
   @override
-  _CategoryNewsState createState() => _CategoryNewsState();
+  State<TopNews> createState() => _TopNewsState();
 }
 
-class _CategoryNewsState extends State<CategoryNews> {
+class _TopNewsState extends State<TopNews> {
 
   Service service = Service();
   List articles = [];
   bool loading = true;
 
-  getCategoryArticles() async {
-    articles = await service.getCategoryNews(widget.category);
+  getArticles() async {
+    articles = await service.getNews();
     setState(() {
       loading = false;
     });
@@ -27,7 +26,7 @@ class _CategoryNewsState extends State<CategoryNews> {
   @override
   void initState() {
     super.initState();
-    getCategoryArticles();
+    getArticles();
   }
 
   @override
@@ -60,25 +59,25 @@ class _CategoryNewsState extends State<CategoryNews> {
           )
       ) :
       SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
-          child: ListView.builder(
-            itemCount: articles.length,
-            shrinkWrap: true,
-            physics: ScrollPhysics(),
-            itemBuilder: (context, index) {
-              return NewsTile(
-                source: articles[index].source.name,
-                image: articles[index].urlToImage,
-                title: articles[index].title,
-                description: articles[index].description,
-                url: articles[index].url,
-                  publishedAt: articles[index].publishedAt
-              );
-            },
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
+            child: ListView.builder(
+              itemCount: articles.length,
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              itemBuilder: (context, index) {
+                return NewsTile(
+                  source: articles[index].source.name,
+                  image: articles[index].urlToImage,
+                  title: articles[index].title,
+                  description: articles[index].description,
+                  url: articles[index].url,
+                    publishedAt: articles[index].publishedAt
+                );
+              },
+            ),
           ),
-        ),
-      ),
+    )
     );
   }
 }

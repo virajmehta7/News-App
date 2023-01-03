@@ -1,10 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 import 'article.dart';
 
 class NewsTile extends StatelessWidget {
-  final String? image, title, description, url, source;
-  const NewsTile({Key? key, this.image, this.title, this.description, this.url, this.source}) : super(key: key);
+  final image, title, description, url, source, publishedAt;
+  const NewsTile({Key? key, required this.image, required this.title, required this.description, required this.url, required this.source, required this.publishedAt}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +20,62 @@ class NewsTile extends StatelessWidget {
         shadowColor: Colors.grey,
         child: Column(
           children: [
-            image != null ? ClipRRect(
-              child: CachedNetworkImage(
-                imageUrl: image!,
-                fit: BoxFit.cover,
+            image != '' ? ClipRRect(
+              child: Image.network(image, fit: BoxFit.cover,
+                loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null ?
+                        loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    ),
+                  );
+                },
               ),
               borderRadius: BorderRadius.circular(20),
             ) : Container(),
-            Padding(
+            source != null ? Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10,10,10,2),
+                child: Text(source,
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                ),
+              ),
+            ) : Container(),
+            title != null ? Padding(
               padding: EdgeInsets.all(10),
-              child: Text(title!,
+              child: Text(title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-            ),
-            Padding(
+            ) : Container(),
+            description != null ? Padding(
               padding: EdgeInsets.fromLTRB(10,5,10,10),
-              child: Text(description!,
+              child: Text(description,
                 style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
               ),
+            ) : Container(),
+            Row(
+              children: [
+                publishedAt != null ? Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(DateFormat('dd/MM/yy hh:mm a')
+                      .format(publishedAt),
+                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                  ),
+                ) : Container(),
+                Spacer(),
+                IconButton(
+                  onPressed: (){
+                    Share.share(url);
+                  },
+                  icon: Icon(Icons.share),
+                )
+              ],
             ),
             SizedBox(height: 15)
           ],
@@ -45,7 +84,7 @@ class NewsTile extends StatelessWidget {
       onTap: (){
         Navigator.push(context,
             MaterialPageRoute(
-                builder: (context) => Article(url: url, title: title, source: source,)));
+                builder: (context) => Article(url: url, title: title, source: source)));
       },
     );
   }

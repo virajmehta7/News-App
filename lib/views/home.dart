@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:vmnews/model/category.dart';
-import 'package:vmnews/service/service.dart';
 import 'all_news.dart';
-import 'categoryTile.dart';
-import 'newsTile.dart';
+import 'category_news.dart';
 import 'search_news.dart';
+import 'top_news.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,22 +11,16 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
-  Service service = Service();
-  List articles = [];
-  bool loading = true;
+  TabController? tabController;
 
   @override
   void initState() {
     super.initState();
-    getArticles();
-  }
-
-  getArticles() async {
-    articles = await service.getNews();
-    setState(() {
-      loading = false;
+    tabController = TabController(initialIndex: 0, length: 8, vsync: this);
+    tabController!.addListener(() {
+      setState(() {});
     });
   }
 
@@ -37,8 +28,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("VM News",
-          style: TextStyle(color: Colors.black, fontSize: 22),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("VM",
+              style: TextStyle(color: Colors.blue, fontSize: 22),
+            ),
+            Text(" News",
+              style: TextStyle(color: Colors.black, fontSize: 22),
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -55,95 +54,40 @@ class _HomeState extends State<Home> {
         elevation: 0,
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllNews())
-                );
-              },
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(15, 50, 15, 40),
-                  child: Text('All News',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("images/allnews.jpg"),
-                      fit: BoxFit.fitWidth,
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.hardLight),
-                    )
-                ),
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: ScrollPhysics(),
-              itemCount: category.length,
-              itemBuilder: (context, index) {
-                return CategoryTile(
-                  image: category[index].image,
-                  category: category[index].category,
-                );
-              },
-            )
-          ],
-        )
-      ),
-      body: loading ?
-      Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
-          child: ListView.builder(
-            itemCount: 5,
-            shrinkWrap: true,
-            physics: ScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)
-                ),
-                margin: EdgeInsets.fromLTRB(5,5,5,30),
-                elevation: 15,
-                shadowColor: Colors.grey,
-                child: Container(
-                  height: MediaQuery.of(context).size.height*0.4,
-                ),
-              );
-            },
-          ),
-        )
-      ) :
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
-              child: ListView.builder(
-                itemCount: articles.length,
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return NewsTile(
-                    source: articles[index].source.name,
-                    image: articles[index].urlToImage,
-                    title: articles[index].title,
-                    description: articles[index].description,
-                    url: articles[index].url,
-                  );
-                },
-              ),
-            )
+        bottom: TabBar(
+          indicatorColor: Colors.blue,
+          labelColor: Colors.blue,
+          unselectedLabelColor: Colors.black,
+          labelStyle: TextStyle(fontSize: 18),
+          indicatorSize: TabBarIndicatorSize.label,
+          controller: tabController,
+          isScrollable: true,
+          physics: ScrollPhysics(),
+          tabs: [
+            Tab(text: 'Top'),
+            Tab(text: 'World'),
+            Tab(text: 'Business'),
+            Tab(text: 'Technology'),
+            Tab(text: 'Entertainment'),
+            Tab(text: 'Sports'),
+            Tab(text: 'Science'),
+            Tab(text: 'Health')
           ],
         ),
       ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          TopNews(),
+          AllNews(),
+          CategoryNews(category: 'Business'),
+          CategoryNews(category: 'Technology'),
+          CategoryNews(category: 'Entertainment'),
+          CategoryNews(category: 'Sports'),
+          CategoryNews(category: 'Science'),
+          CategoryNews(category: 'Health')
+        ],
+      )
     );
   }
 }
