@@ -10,7 +10,6 @@ class SearchNews extends StatefulWidget {
 }
 
 class _SearchNewsState extends State<SearchNews> {
-
   Service service = Service();
   List articles = [];
   TextEditingController search = TextEditingController();
@@ -24,22 +23,23 @@ class _SearchNewsState extends State<SearchNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search",
-          style: TextStyle(color: Colors.black, fontSize: 23.5),
+        title: Text(
+          "Search",
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: Theme.of(context).iconTheme,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(20,5,20,0),
+              padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
               child: TextField(
                 textInputAction: TextInputAction.go,
-                onSubmitted: (_){
+                onSubmitted: (_) {
                   getSearchArticles(search.text);
                 },
                 controller: search,
@@ -49,26 +49,25 @@ class _SearchNewsState extends State<SearchNews> {
                 ),
               ),
             ),
-            articles.length == 0 ?
-            Container() :
-            Padding(
-              padding: EdgeInsets.fromLTRB(12, 30, 12, 5),
-              child: ListView.builder(
-                itemCount: articles.length,
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return NewsTile(
-                    source: articles[index].source.name,
-                    image: articles[index].urlToImage,
-                    title: articles[index].title,
-                    description: articles[index].description,
-                    url: articles[index].url,
-                      publishedAt: articles[index].publishedAt
-                  );
-                },
-              ),
-            )
+            articles.length == 0
+                ? Container()
+                : Padding(
+                    padding: EdgeInsets.fromLTRB(12, 30, 12, 5),
+                    child: ListView.builder(
+                      itemCount: articles.length,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return NewsTile(
+                            source: articles[index].source.name,
+                            image: articles[index].urlToImage,
+                            title: articles[index].title,
+                            description: articles[index].description,
+                            url: articles[index].url,
+                            publishedAt: articles[index].publishedAt);
+                      },
+                    ),
+                  )
           ],
         ),
       ),
