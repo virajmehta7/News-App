@@ -42,7 +42,9 @@ dev_dependencies:
 
 flutter_icons:
   android: "launcher_icon"
-  image_path: "assets/images/news.png"
+  image_path: "assets/images/appIcon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/appIcon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
