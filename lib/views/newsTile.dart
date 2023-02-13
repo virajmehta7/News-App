@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
-import 'article.dart';
+import 'package:vmnews/views/article.dart';
 
 class NewsTile extends StatelessWidget {
   final image, title, description, url, source, publishedAt;
-  const NewsTile(
-      {Key? key,
-      required this.image,
-      required this.title,
-      required this.description,
-      required this.url,
-      required this.source,
-      required this.publishedAt})
-      : super(key: key);
+  const NewsTile({
+    Key? key,
+    this.image,
+    this.title,
+    this.description,
+    this.url,
+    this.source,
+    this.publishedAt,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 30),
-        color: Theme.of(context).backgroundColor,
-        elevation: 15,
-        shadowColor: Colors.grey,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        elevation: 8,
         child: Column(
           children: [
             image != ''

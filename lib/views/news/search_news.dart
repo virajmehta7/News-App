@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vmnews/service/service.dart';
-import 'newsTile.dart';
+import 'package:vmnews/views/news.dart';
 
 class SearchNews extends StatefulWidget {
   const SearchNews({Key? key}) : super(key: key);
@@ -23,14 +23,8 @@ class _SearchNewsState extends State<SearchNews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Search",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        title: Text("Search"),
         centerTitle: true,
-        iconTheme: Theme.of(context).iconTheme,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,25 +43,7 @@ class _SearchNewsState extends State<SearchNews> {
                 ),
               ),
             ),
-            articles.length == 0
-                ? Container()
-                : Padding(
-                    padding: EdgeInsets.fromLTRB(12, 30, 12, 5),
-                    child: ListView.builder(
-                      itemCount: articles.length,
-                      shrinkWrap: true,
-                      physics: ScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NewsTile(
-                            source: articles[index].source.name,
-                            image: articles[index].urlToImage,
-                            title: articles[index].title,
-                            description: articles[index].description,
-                            url: articles[index].url,
-                            publishedAt: articles[index].publishedAt);
-                      },
-                    ),
-                  )
+            articles.length == 0 ? Container() : News(articles: articles)
           ],
         ),
       ),

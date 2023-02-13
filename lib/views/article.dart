@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -14,22 +12,40 @@ class Article extends StatefulWidget {
 }
 
 class _ArticleState extends State<Article> {
-  final Completer controller = Completer();
+  var loadingPercentage = 0;
+  late final WebViewController controller;
 
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    controller = WebViewController()
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageStarted: (url) {
+            setState(() {
+              loadingPercentage = 0;
+            });
+          },
+          onProgress: (progress) {
+            setState(() {
+              loadingPercentage = progress;
+            });
+          },
+          onPageFinished: (url) {
+            setState(() {
+              loadingPercentage = 100;
+            });
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url.toString()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.source!,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: Text(widget.source!),
         actions: [
           IconButton(
             onPressed: () {
@@ -38,17 +54,17 @@ class _ArticleState extends State<Article> {
             icon: Icon(Icons.share),
           )
         ],
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: Theme.of(context).iconTheme,
       ),
-      body: Container(
-        child: WebView(
-          initialUrl: widget.url,
-          onWebViewCreated: (WebViewController webViewController) {
-            controller.complete(webViewController);
-          },
-        ),
+      body: Stack(
+        children: [
+          WebViewWidget(
+            controller: controller,
+          ),
+          if (loadingPercentage < 100)
+            LinearProgressIndicator(
+              value: loadingPercentage / 100.0,
+            ),
+        ],
       ),
     );
   }
