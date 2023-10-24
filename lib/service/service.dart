@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:vmnews/model/model.dart';
+import 'package:news/model/model.dart';
 
 class Service {
-  getNews() async {
+  getTopNews() async {
     var url = Uri.parse(
         "https://newsapi.org/v2/top-headlines?country=in&language=en&pageSize=100&apiKey=e384bb1a856a4051984dc40de691c58f");
     var res = await http.get(url);
@@ -14,7 +14,7 @@ class Service {
     return articles;
   }
 
-  getAllNews() async {
+  getWorldNews() async {
     var url = Uri.parse(
         "https://newsapi.org/v2/top-headlines?language=en&apiKey=e384bb1a856a4051984dc40de691c58f");
     var res = await http.get(url);
@@ -25,7 +25,7 @@ class Service {
     return articles;
   }
 
-  getCategoryNews(String? category) async {
+  getCategoryNews(String category) async {
     var url = Uri.parse(
         "https://newsapi.org/v2/top-headlines?category=$category&country=in&language=en&pageSize=100&apiKey=e384bb1a856a4051984dc40de691c58f");
     var res = await http.get(url);
