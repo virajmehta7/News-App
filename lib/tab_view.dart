@@ -47,6 +47,7 @@ class TabView extends StatelessWidget {
           ),
         ),
         body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             TopNews(),
             WorldNews(),
